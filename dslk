@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+const int MAX = 11;
+struct Node {
+    int data;
+    Node* next;
+};
+Node* adj[MAX + 1];
+void taoList() {
+    for (int i = 1; i <= MAX; i++) {
+        adj[i] = NULL;
+    }
+}
+void addfirst(int a, int b) {
+    Node* p = new Node;
+    p->data = b;
+    p->next = adj[a];
+    adj[a] = p;
+}
+void themCanh(int i, int j) {
+    addfirst(i, j);
+    addfirst(j, i);
+}
+void inDanhSach() {
+    cout << " do thi dung danh sach lien ket" << endl;
+    for (int i = 1; i <= MAX; i++) {
+        cout << "dinh " << i << ": ";
+        Node* p = adj[i];
+        if (p == NULL) {
+            cout << "Khong co ket noi";
+        }
+        while (p != NULL) {
+            cout << "-> " << p->data << " ";
+            p = p->next;
+        }
+        cout << endl;
+    }
+}
+int main() {
+    taoList();
+    themCanh(1, 2);
+    themCanh(1, 10);
+    themCanh(1, 9);
+    themCanh(1, 8);
+    themCanh(1, 7);
+    themCanh(1, 6);
+    themCanh(2, 11);
+    themCanh(11, 10);
+    themCanh(6, 5);
+    themCanh(5, 4);
+    themCanh(6, 4);
+    themCanh(4, 3);
+    themCanh(3, 2);
+    inDanhSach();
+
+    return 0;
+}
